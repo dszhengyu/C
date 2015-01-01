@@ -17,6 +17,15 @@ Position Header(List L);
 Position First(List L);
 Position Advance(Position P);
 ElementType Retrieve(Position P);
-
+void printList(List L);
+void PrintLots(List L, List P);
+void swapNode(List L, Position P1, Position P2);
+List andList(List L1, List L2);
+Position last(List L);
+List orList(List L1, List L2);
+List createList(void);
+List addList(List L1, List L2);
+void insertPoly(ElementType Coefficient, ElementType Exponent, List L);
 #endif
+
 
