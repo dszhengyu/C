@@ -4,6 +4,7 @@ struct Node;
 typedef struct Node *PtrToNode;
 typedef PtrToNode List;
 typedef PtrToNode Position;
+typedef List Interger;
 
 List MakeEmpty(List L);
 int IsEmpty(List L);
@@ -26,6 +27,13 @@ List orList(List L1, List L2);
 List createList(void);
 List addList(List L1, List L2);
 void insertPoly(ElementType Coefficient, ElementType Exponent, List L);
+void insertPoly2(ElementType Coefficient, ElementType Exponent, List L, Position P);
+List mutiplePoly(List L1, List L2);
+List expPoly(List L, int n);
+//3.9 any length integer
+Interger toInterger(char *s);
+Interger addInterger(Interger a, Interger b);
+Interger multipleInterger(Interger a, Interger b);
+Interger expInterger(Interger a, int n);
+void printInterger(Interger a);
 #endif
-
-
