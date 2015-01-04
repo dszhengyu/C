@@ -215,9 +215,57 @@ List createList(void)
 	List L = malloc(sizeof(L));
 
 	if (L != NULL) {
-		L->next = NULL;
+		L->Next = NULL;
 	}
 
 	return L;
+}
+
+void reverseList(List L)
+{
+	if (L->Next == NULL)
+		return;
+
+	Position head, l;
+	head = l = L->Next;
+	L->Next = last(L);
+	
+	while (head->Next != NULL) {
+		l = head;
+		while (l->Next->Next != NULL)
+			l = l->Next;
+		l->Next->Next = l;
+		l->Next = NULL;
+	}
+}
+
+void takeNodeToFirst(List L, Position P)
+{
+	if (L->Next == NULL || L->Next->Next == NULL)
+		return;
+
+	Position prev = L->Next;
+	
+	while (prev->Next != P)
+		prev = prev->Next;
+	prev->Next = P->Next;
+	P->Next = L->Next;
+	L->Next = P;
+}
+
+void insertIntoSelfAdj(ElementType x, List L)
+{
+	Insert(x, L, L);
+}
+
+Position findInSelfAdj(ElementType x, List L)
+{
+	Position p = L->Next;
+
+	while (p != NULL && p->Element != x)
+		p = p->Next;
+	if (p != NULL)
+		takeNodeToFirst(L, p);
+	return p;
 }
 

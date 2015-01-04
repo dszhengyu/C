@@ -5,6 +5,8 @@ typedef struct Node *PtrToNode;
 typedef PtrToNode List;
 typedef PtrToNode Position;
 typedef List Interger;
+typedef List Group;
+typedef Position Grouper;
 
 List MakeEmpty(List L);
 int IsEmpty(List L);
@@ -36,4 +38,15 @@ Interger addInterger(Interger a, Interger b);
 Interger multipleInterger(Interger a, Interger b);
 Interger expInterger(Interger a, int n);
 void printInterger(Interger a);
+//3.10 hot potato
+Grouper createGrouper(void);
+Group initGroup(int N);
+void freeGrouper(Grouper g);
+void runGroup(int N, int M);
+//exec 3.12
+void reverseList(List L);
+//exec 3.15
+void takeNodeToFirst(List L, Position P);
+void insertIntoSelfAdj(ElementType x, List L);
+Position findInSelfAdj(ElementType x, List L);
 #endif
