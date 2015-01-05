@@ -17,5 +17,5 @@ Position Header(const List L);
 Position First(const List L);
 Position Advance(const Position P);
 ElementType retrieve(const Position P);
-
+Position findAdj(ElementType x, List L);
 #endif

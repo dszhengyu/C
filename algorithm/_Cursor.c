@@ -74,3 +74,22 @@ void Insert(ElementType X, List L, Position P)
 	CursorSpace[tmp].Next = CursorSpace[P].Next;
 	CursorSpace[P].Next = tmp;
 }
+
+//exec 3.15
+Position findAdj(ElememntType x, List L)
+{
+	Position P = L;
+
+	while (P->Next && P->Next->Element != x) {
+		P = P->Next;
+	}
+
+	if (P->Next) {
+		Position tmp = P->Next;
+		P->Next = P->Next->Next;
+		tmp->Next = L->Next;
+		L->Next = tmp
+			return tmp;
+	}
+	else P->Next;
+}

@@ -22,7 +22,7 @@ Position Advance(Position P);
 ElementType Retrieve(Position P);
 void printList(List L);
 void PrintLots(List L, List P);
-void swapNode(List L, Position P1, Position P2);
+void swapNeighborNode(List L, Position P1, Position P2);
 List andList(List L1, List L2);
 Position last(List L);
 List orList(List L1, List L2);
@@ -49,4 +49,8 @@ void reverseList(List L);
 void takeNodeToFirst(List L, Position P);
 void insertIntoSelfAdj(ElementType x, List L);
 Position findInSelfAdj(ElementType x, List L);
+//exec 3.16 d
+void removeSamePosition(List L);
+void sortList(List L);
+void swapNode(List L, Position P1, Position P2);
 #endif

@@ -121,7 +121,7 @@ void PrintLots(List L, List P)
 }
 
 //exec 3.3.a
-void swapNode(List L, Position P1, Position P2)
+void swapNeighborNode(List L, Position P1, Position P2)
 {
 	Position tmp;
 	
@@ -269,3 +269,71 @@ Position findInSelfAdj(ElementType x, List L)
 	return p;
 }
 
+void removeSamePosition(List L)
+{
+	L = L->Next;
+	while (L != NULL) {
+		Position k = L;
+		while (k->Next != NULL) {
+			if (k->Next->Element == L->Element) {
+				Position tmp = k->Next;
+				k->Next = tmp->Next;
+				free(tmp);
+			}
+			else
+				k = k->Next;
+		}
+		L = L->Next;
+	}
+}
+
+void swapNode(List L, Position P1, Position P2)
+{
+	Position pre1, pre2, tmp;
+	
+	pre1 = pre2 = NULL;
+	
+	while (L != NULL) {
+		if (L->Next == P1)
+			pre1 = L;
+		if (L->Next == P2)
+			pre2 = L;
+		if (pre1 != NULL && pre2 != NULL)
+			break;
+		else 
+			L = L->Next;
+	}
+
+	if (pre1 == NULL || pre2 == NULL) {
+		printf("Swap Error");
+		return;
+	}
+
+//attention, its order should be like this
+//just consider P1 and P2 are continuous
+//or I don't know, it just work!!!!!!!!!!!!!!!
+
+	pre1->Next = P2;
+	pre2->Next = P1;
+	tmp = P1->Next;
+	P1->Next = P2->Next;
+	P2->Next = tmp;
+}	
+
+//have difficult to apply quicksort or mergesort with list which
+//has head node==
+//so this is bububle sort or sth runs with O(n^2)
+void sortList(List L)
+{
+	while (L->Next != NULL) {
+		Position P = L->Next;
+		while (P->Next != NULL) {
+			if (P->Next->Element < L->Next->Element)
+				swapNode(L, L->Next, P->Next);
+			else
+				P = P->Next;
+		}
+		L = L->Next;
+	}
+	
+}
