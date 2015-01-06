@@ -1,43 +1,26 @@
 #include <stdio.h>
 #define ElementType int
-#include "LazyList.h"
+#include "_Stack_H_by_array.h"
 #include <malloc.h>
 
 
-struct Head
-{
-	int real;
-	int fake;
-	Node next;
-};
-
-struct Node
-{
-	ElementType element;
-	int deleted;
-	Node next;
-};
-
 int main(void)
 {
-	List L = createList();
-	insertNodeToHead(L, 1);
-	insertNodeToHead(L, 2);
-	insertNodeToHead(L, 3);
-	insertNodeToHead(L, 4);
-	insertNodeToHead(L, 5);
-	insertNodeToHead(L, 6);
-	printList(L);
-	putchar('\n');
-	deleteNodeLazy(L, L->next);
-	deleteNodeLazy(L, L->next->next);
-	printList(L);
-	putchar('\n');
-	deleteNodeLazy(L, L->next->next->next);
-	printList(L);
-	putchar('\n');
-	deleteNodeLazy(L, L->next);
-	printList(L);
-	putchar('\n');
+//	char *s[10] = {"6", "5", "2", "3", "+", "8", "*", "+", "3", "+", "*", "\0"};
+	char *s[100];
+	s[0] = "6";
+	s[1] = "5";
+	s[2] = "2";
+	s[3] = "3";
+	s[4] = "+";
+	s[5] = "8";
+	s[6] = "*";
+	s[7] = "+";
+	s[8] = "3";
+	s[9] = "+";
+	s[10] = "*";
+	s[11] = NULL;
+
+	printf("%d\n", postfixCalculator(s));
 	return 0;
 }

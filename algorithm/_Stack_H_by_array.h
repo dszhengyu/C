@@ -12,5 +12,6 @@ void Push(ElementType X, Stack S);
 ElementType Top(Stack S);
 void Pop(Stack S);
 ElementType TopAndPop(Stack S);
-
+void languageExamine(char *s);
+ElementType postfixCalculator(char *s[]);
 #endif
