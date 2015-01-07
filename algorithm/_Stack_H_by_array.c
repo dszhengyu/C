@@ -74,7 +74,7 @@ void Push(ElementType X, Stack S)
 ElementType Top(Stack S)
 {
 	if (IsEmpty(S)) {
-		printf("stack empty!");
+		//printf("stack empty!");
 		return -1;
 	}
 	else
@@ -181,4 +181,45 @@ ElementType postfixCalculator(char *s[])
 	ElementType x = TopAndPop(S);
 	DisposeStack(S);
 	return x;
+}
+
+//ugly program==
+//pardon me...
+char **transInToPost(char *s[])
+{
+	char *result[100];
+	int len = 0;
+	Stack S = CreateStack(100);
+
+	while (*s != NULL) {
+		if (**s == ')') {
+			while (Top(S) != '(' && Top(S) != -1) {
+				printf("%c", TopAndPop(S));
+			}
+			Pop(S);
+		}
+		else if (**s == '*' || **s == '/') {
+			while (Top(S) != '+' && Top(S) != '-' && Top(S) != '(' && Top(S) != -1) {
+				printf("%c", TopAndPop(S));
+			}
+			Push(**s, S);
+		}
+		else if (**s == '+' || **s == '-') {
+			while (Top(S) != '(' && Top(S) != -1)
+				printf("%c", TopAndPop(S));
+			Push(**s, S);
+		}
+		else if (**s == '(') {
+			Push(**s, S);
+		}
+		else
+			printf("%s", *s);
+		s++;
+	}
+
+	while (!IsEmpty(S)) 
+		printf("%c", TopAndPop(S));
+	DisposeStack(S);
+
+	return NULL;
 }

@@ -14,4 +14,5 @@ void Pop(Stack S);
 ElementType TopAndPop(Stack S);
 void languageExamine(char *s);
 ElementType postfixCalculator(char *s[]);
+char **transInToPost(char *s[]);
 #endif
