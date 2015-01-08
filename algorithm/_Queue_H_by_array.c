@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #define ElementType int
-#include "_Queue_H_by_array.h"
+#include "_Queue_H.h"
 #define MinQueueSize (5)
 
 struct QueueRecord

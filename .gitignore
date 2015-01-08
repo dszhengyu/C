@@ -5,3 +5,6 @@ Debug/
 *.opt
 *.plg
 a.out
+APUE/apue.3e
+apue.h
+error.o
