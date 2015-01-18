@@ -3,6 +3,7 @@
 #define ElementType int
 #include "_LIST_H.h"
 
+
 struct Node
 {
 	ElementType Element;
