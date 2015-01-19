@@ -1,28 +1,17 @@
 #include <stdio.h>
-#define ElementType int
-#include "_Queue_H.h"
-#include <malloc.h>
-
+#include "Tree.h"
 
 int main(void)
 {
-	Queue Q = CreateListQueue();
-	Enqueue(10, Q);
-	Enqueue(13, Q);
-	Enqueue(10, Q);
-	Enqueue(10, Q);
-	Enqueue(10, Q);
-	Enqueue(80, Q);
-	printQueue(Q);
-	printf("\n%d\t", FrontAndDequeue(Q));
-	printf("\n%d\t", FrontAndDequeue(Q));
-	printf("\n%d\t", FrontAndDequeue(Q));
-	printf("\n%d\t", FrontAndDequeue(Q));
-	printf("\n%d\t", FrontAndDequeue(Q));
-	printf("\n%d\t", FrontAndDequeue(Q));
-	printf("\n%d\t", FrontAndDequeue(Q));
-	printf("\n%d\t", FrontAndDequeue(Q));
-	printf("\n%d\t", FrontAndDequeue(Q));
-	printf("\n%d\t", FrontAndDequeue(Q));
+	SearchTree T = Insert(123, NULL);
+	Insert(11, T);
+	Insert(443, T);
+	Insert(43, T);
+	Insert(743, T);
+	Insert(943, T);
+	Insert(043, T);
+	Insert(143, T);
+
+	printTree(T);
 	return 0;
 }
