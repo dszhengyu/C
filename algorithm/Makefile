@@ -1,14 +1,10 @@
 #to make a list
-subject = c.o error.o Tree.o 
+subject = c.c error.c Tree.c _LIST_.c
 a.out: $(subject)
 	gcc -o a.out $(subject)
-c.o: c.c Tree.h
-	gcc -c c.c
-error.o: error.h
-	gcc -c error.c
-Tree.o: Tree.c Tree.h
-	gcc -c Tree.c
+test: $(subject)
+	gcc -o a.out -g $(subject)
 
 .PHONY:	clean
 clean:
-	-rm $(subject) a.out
+	-rm a.out

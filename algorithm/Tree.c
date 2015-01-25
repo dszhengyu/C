@@ -1,24 +1,16 @@
 #include "Tree.h"
 
-struct TreeNode
-{
-	ElementType Element;
-	Position Left;
-	Position Right;
-};
-
-
-SearchTree MakeEmpty(SearchTree T)
+SearchTree makeTreeEmpty(SearchTree T)
 {
 	if (T != NULL) {
-		MakeEmpty(T->Left);
-		MakeEmpty(T->Right);
+		makeTreeEmpty(T->Left);
+		makeTreeEmpty(T->Right);
 		free(T);
 	}
 	return NULL;
 }
 
-Position Find(ElementType X, SearchTree T)
+treePosition findTree(ElementType X, SearchTree T)
 {
 	if (T == NULL) {
 		printf("Not in Tree");
@@ -26,31 +18,31 @@ Position Find(ElementType X, SearchTree T)
 	}
 	
 	if (X < T->Element)
-		return Find(X, T->Left);
+		return findTree(X, T->Left);
 	else if (X < T->Element)
-		return Find(X, T->Right);
+		return findTree(X, T->Right);
 	else
 		return T;
 }
 
-Position FindMin(SearchTree T)
+treePosition findTreeMin(SearchTree T)
 {
 	while (T->Left != NULL)
 		T = T->Left;
 	return T;
 }
 
-Position FindMax(SearchTree T)
+treePosition findTreeMax(SearchTree T)
 {
 	if (T == NULL)
 		return NULL;
 	if (T->Right != NULL)
-		return FindMax(T->Right);
+		return findTreeMax(T->Right);
 	else
 		return T;
 }
 
-SearchTree Insert(ElementType X, SearchTree T)
+SearchTree insertTreeNode(ElementType X, SearchTree T)
 {
 	if (T == NULL) {
 		T = malloc(sizeof(struct TreeNode));
@@ -65,29 +57,29 @@ SearchTree Insert(ElementType X, SearchTree T)
 	}
 	else {
 		if (X < T->Element)
-			T->Left = Insert(X, T->Left);
+			T->Left = insertTreeNode(X, T->Left);
 		else if (X > T->Element)
-			T->Right = Insert(X, T->Right);
+			T->Right = insertTreeNode(X, T->Right);
 	}
 
 	return T;
 }
 
-SearchTree Delete(ElementType X, SearchTree T)
+SearchTree deleteTreeNode(ElementType X, SearchTree T)
 {
-	Position tmp;
+	treePosition tmp;
 
 	if (T == NULL)
 		err_sys("Out of Space");
 	else if (X < T->Element)
-		T->Left = Delete(X, T->Left);
+		T->Left = deleteTreeNode(X, T->Left);
 	else if (X > T->Element)
-		T->Right = Delete(X, T->Right);
+		T->Right = deleteTreeNode(X, T->Right);
 	else
 		if (T->Left && T->Right) {
-			tmp = FindMin(T);
+			tmp = findTreeMin(T);
 			T->Element = tmp->Element;
-			T->Right = Delete(T->Element, T->Right);
+			T->Right = deleteTreeNode(T->Element, T->Right);
 		}
 		else {
 			tmp = T;
@@ -100,7 +92,7 @@ SearchTree Delete(ElementType X, SearchTree T)
 	return T;
 }
 
-ElementType Retrive(Position P);
+ElementType Retrive(treePosition P);
 
 void printTree(SearchTree T)
 {
@@ -109,4 +101,58 @@ void printTree(SearchTree T)
 		printTree(T->Left);
 		printTree(T->Right);
 	}
+}
+
+static List *initListArray(int MAXLEVEL)
+{
+	List *listArray = malloc(sizeof(List) * MAXLEVEL);
+	int i;
+
+	if (listArray == NULL)
+		err_sys("Out of Space!");
+
+	for (i = 0; i <	MAXLEVEL; i++)
+		listArray[i] = NULL;
+
+	return listArray;
+}
+
+static void fillListArray(SearchTree T, List *listArray)
+{
+	static int level = -1;
+	++level;
+	int tmp = level;
+	
+	if (T == NULL)
+		return;
+	if (listArray[level] == NULL)
+		listArray[level] = createList();
+	
+	Insert(T->Element, listArray[level], listArray[level]);
+	fillListArray(T->Left, listArray);
+	level = tmp;
+	fillListArray(T->Right, listArray);
+	level = ++tmp;
+}
+
+void printTreeByLevel(SearchTree T)
+{
+	List *array = initListArray(100);
+
+	fillListArray(T, array);
+	
+	List *tmp = array;
+
+	while (*tmp != NULL) {
+		Position P = (*tmp)->Next;
+		while (P != NULL) {
+			printf("%d\t", P->Element);
+			P = P->Next;
+		}
+		DeleteList(*tmp);
+		++tmp;
+		putchar('\n');
+	}
+
+	free(array);
 }

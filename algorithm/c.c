@@ -1,17 +1,20 @@
 #include <stdio.h>
 #include "Tree.h"
+#include "_LIST_H.h"
 
 int main(void)
 {
-	SearchTree T = Insert(123, NULL);
-	Insert(11, T);
-	Insert(443, T);
-	Insert(43, T);
-	Insert(743, T);
-	Insert(943, T);
-	Insert(043, T);
-	Insert(143, T);
+	SearchTree T = insertTreeNode(123, NULL);
+	insertTreeNode(11, T);
+	insertTreeNode(443, T);
+	insertTreeNode(4, T);
+	insertTreeNode(743, T);
+	insertTreeNode(943, T);
+	insertTreeNode(43, T);
+	insertTreeNode(143, T);
 
 	printTree(T);
+	putchar('\n');
+	printTreeByLevel(T);
 	return 0;
 }

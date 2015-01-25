@@ -3,13 +3,6 @@
 #define ElementType int
 #include "_LIST_H.h"
 
-
-struct Node
-{
-	ElementType Element;
-	Position Next;
-};
-
 int IsEmpty(List L)
 {
 	return L->Next == NULL;
@@ -64,10 +57,9 @@ void Insert(ElementType X, List L, Position P)
 
 	temp = (Position)malloc(sizeof(struct Node));
 
-	if (temp == NULL) {
-		printf("out of space!");
-		return;
-	}
+	if (temp == NULL) 
+		err_sys("Out of Space!");
+	
 	temp->Element = X;
 	temp->Next = P->Next;
 	P->Next = temp;
@@ -213,11 +205,12 @@ List orList(List L1, List L2)
 
 List createList(void)
 {
-	List L = malloc(sizeof(L));
+	List L = malloc(sizeof(struct Node));
 
-	if (L != NULL) {
+	if (L == NULL)
+		err_sys("Out of Space!");
+	else
 		L->Next = NULL;
-	}
 
 	return L;
 }

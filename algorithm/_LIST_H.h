@@ -1,4 +1,10 @@
 #ifndef _LIST_H
+#define _LIST_H
+
+#include <stdio.h>
+#include <malloc.h>
+#include "error.h"
+#define ElementType int
 
 struct Node;
 typedef struct Node *PtrToNode;
@@ -7,6 +13,12 @@ typedef PtrToNode Position;
 typedef List Interger;
 typedef List Group;
 typedef Position Grouper;
+
+struct Node
+{
+	ElementType Element;
+	Position Next;
+};
 
 List MakeEmpty(List L);
 int IsEmpty(List L);

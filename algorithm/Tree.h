@@ -5,19 +5,28 @@
 #include "error.h"
 #include <malloc.h>
 #define ElementType int
+#include "_LIST_H.h"
 
 struct TreeNode;
-typedef struct TreeNode *Position;
+typedef struct TreeNode *treePosition;
 typedef struct TreeNode *SearchTree;
 
-SearchTree MakeEmpty(SearchTree T);
-Position Find(ElementType X, SearchTree T);
-Position FindMin(SearchTree T);
-Position FindMax(SearchTree T);
-SearchTree Insert(ElementType X, SearchTree T);
-SearchTree Delete(ElementType X, SearchTree T);
-ElementType Retrive(Position P);
+struct TreeNode
+{
+	ElementType Element;
+	treePosition Left;
+	treePosition Right;
+};
+
+SearchTree makeTreeEmpty(SearchTree T);
+treePosition findTree(ElementType X, SearchTree T);
+treePosition findTreeMin(SearchTree T);
+treePosition findTreeMax(SearchTree T);
+SearchTree insertTreeNode(ElementType X, SearchTree T);
+SearchTree deleteTreeNode(ElementType X, SearchTree T);
+ElementType Retrive(treePosition P);
 void printTree(SearchTree T);
+void printTreeByLevel(SearchTree T);
 
 #endif
 
