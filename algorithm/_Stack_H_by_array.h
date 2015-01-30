@@ -1,4 +1,16 @@
 #ifndef _Stack_H_by_array
+#define _Stack_H_by_array
+
+#include <stdio.h>
+#include <malloc.h>
+#include "AvlTree.h"
+#define ElementType int
+
+struct Node
+{
+	ElementType Position;
+	PtrToNode Next;
+};
 
 struct StackRecord;
 typedef struct StackRecord *Stack;

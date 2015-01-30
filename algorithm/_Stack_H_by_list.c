@@ -1,13 +1,4 @@
-#include <stdio.h>
-#define ElementType int
 #include "_Stack_H_by_list.h"
-#include <malloc.h>
-
-struct Node
-{
-	ElementType Element;
-	PtrToNode Next;
-};
 
 int IsEmpty(Stack S)
 {
@@ -26,11 +17,11 @@ Stack CreateStack(void)
 	}
 
 	S->Next = NULL;
-	MakeEmpty(S);
+	makeStackEmpty(S);
 	return S;
 }
 
-void MakeEmpty(Stack S)
+void makeStackEmpty(Stack S)
 {
 	if (S == NULL)
 		printf("must create stack first!");
@@ -61,7 +52,7 @@ ElementType Top(Stack S)
 		return S->Next->Element;
 	else {
 		printf("stack empty");
-		return -1;
+		return NULL;
 	}
 }
 
@@ -76,4 +67,10 @@ void Pop(Stack S)
 	}
 	else
 		printf("stack empty");
+}
+
+void DisposeStack(Stack S)
+{
+	makeStackEmpty(S);
+	free(S);
 }

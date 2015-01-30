@@ -1,5 +1,5 @@
 #to make a list
-subject = c.c error.c Tree.c _LIST_.c
+subject = c.c error.c AvlTree.c _Stack_H_by_list.c 
 a.out: $(subject)
 	gcc -o a.out $(subject)
 test: $(subject)

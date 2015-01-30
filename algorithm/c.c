@@ -1,20 +1,20 @@
 #include <stdio.h>
-#include "Tree.h"
-#include "_LIST_H.h"
+#include "AvlTree.h"
 
 int main(void)
 {
-	SearchTree T = insertTreeNode(123, NULL);
-	insertTreeNode(11, T);
-	insertTreeNode(443, T);
-	insertTreeNode(4, T);
-	insertTreeNode(743, T);
-	insertTreeNode(943, T);
-	insertTreeNode(43, T);
-	insertTreeNode(143, T);
+	AvlTree T = insertNoRecursive(10, NULL);
+	insertNoRecursive(2, T);
+	insertNoRecursive(20, T);
+	insertNoRecursive(1, T);
+	insertNoRecursive(0, T);
+	insertNoRecursive(30, T);
+	insertNoRecursive(25, T);
 
 	printTree(T);
-	putchar('\n');
-	printTreeByLevel(T);
+	return 0;
+	insertNoRecursive(25, T);
+
+	printTree(T);
 	return 0;
 }

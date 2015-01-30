@@ -1,13 +1,5 @@
 #include "AvlTree.h"
 
-struct AvlNode
-{
-	ElementType Element;
-	AvlTree Left;
-	AvlTree Right;
-	int Height;
-};
-
 static int Height(Position P)
 {
 	if (P == NULL)
@@ -16,7 +8,7 @@ static int Height(Position P)
 		return P->Height;
 }
 
-AvlTree Insert(ElementType X, AvlTree T)
+AvlTree Insert(AvlTreeElementType X, AvlTree T)
 {
 	if (T == NULL) {
 		T == malloc(sizeof(struct AvlNode));
@@ -91,4 +83,83 @@ static Position DoubleRotateWithRight(Position K3)
 	K3->Right = SingleRotateWithLeft(K3->Right);
 
 	return SingleRotateWithRight(K3);
+}
+
+AvlTree insertNoRecursive(AvlTreeElementType X, AvlTree T)
+{
+	//new tree
+	if (T == NULL) {
+		T = malloc(sizeof(struct AvlNode));
+
+		if (T == NULL)
+			err_sys("Out of Space!");
+
+		T->Element = X;
+		T->Left = T->Right = NULL;
+		return T;
+	}
+
+	Stack S = CreateStack();
+
+	while (T != NULL) {
+		Push(T, S);
+		if (X < T->Element) {
+			T = T->Left;
+		}
+		else  if (X > T->Element) {
+			T = T->Right;
+		}
+	}
+
+	T = Top(S);
+	Position *tmp;
+	if (X < T->Element) {
+		tmp = &(T->Left);
+	}
+	else {
+		tmp = &(T->Right);
+	}
+	*tmp = malloc(sizeof(struct AvlNode));
+	if (*tmp == NULL)
+		err_sys("Out of Space!");
+
+	T = *tmp;
+	T->Left = T->Right = NULL;
+	T->Element = X;
+	T->Height = 0;
+
+	AvlTree cur = NULL;
+	while (!IsEmpty(S)) {
+		cur = Top(S);
+		Pop(S);
+		if (X < cur->Element)
+			cur->Left = T;
+		else if (X > cur->Element)
+			cur->Right = T;
+
+		T = cur;
+		if (Height(T->Left) - Height(T->Right) == 2) {
+			if (X < T->Left->Element)
+				T = SingleRotateWithLeft(T);
+			else
+				T = DoubleRotateWithLeft(T);
+		}
+		else if (Height(T->Right) - Height(T->Left) == 2) {
+			if (X > T->Right->Element)
+				T = SingleRotateWithRight(T);
+			else
+				T = DoubleRotateWithRight(T);
+		}
+		T->Height = Max(Height(T->Left), Height(T->Right)) + 1;
+	}
+	DisposeStack(S);
+}
+
+void printTree(AvlTree T)
+{
+	if (T != NULL) {
+		printTree(T->Left);
+		printf("Element = %d\tHeight = %d\n", T->Element, T->Height);
+		printTree(T->Right);
+	}
 }
