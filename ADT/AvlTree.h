@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <malloc.h>
-#include "error.h"
+//#include "error.h"
 #define AvlTreeElementType int
 #define Max(a, b) ((a) > (b) ? (a) : (b))
 

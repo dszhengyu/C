@@ -13,7 +13,7 @@ AvlTree Insert(AvlTreeElementType X, AvlTree T)
 	if (T == NULL) {
 		T == malloc(sizeof(struct AvlNode));
 		if (T == NULL)
-			err_sys("Out of Space");
+            err_sys("Out of Space");
 		else {
 			T->Element = X;
 			T->Left = T->Right = NULL;
@@ -92,8 +92,7 @@ AvlTree insertNoRecursive(AvlTreeElementType X, AvlTree T)
 		T = malloc(sizeof(struct AvlNode));
 
 		if (T == NULL)
-			err_sys("Out of Space!");
-
+            err_sys("Out of Space!");
 		T->Element = X;
 		T->Left = T->Right = NULL;
 		return T;

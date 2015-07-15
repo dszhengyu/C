@@ -166,8 +166,7 @@ List orList(List L1, List L2)
 	List L = createList();
 
 	if (L == NULL) {
-		printf("out of space");
-		return;
+        err_sys("Out Of Space!");
 	}
 
 	L1 = L1->Next;
@@ -231,6 +230,32 @@ void reverseList(List L)
 		l->Next->Next = l;
 		l->Next = NULL;
 	}
+}
+
+void reverseList2(List L)
+{
+    if (L == NULL) {
+        err_msg("reverse NULL");
+        return;
+    }
+
+    if (L->Next == NULL)
+        return;
+
+    Position first;
+    Position second;
+    first = L->Next;
+    L->Next = last(L);
+    second = first->Next;
+    first->Next = NULL;//new tail
+
+    Position posTmp;
+    while (second != NULL) {
+        posTmp = second->Next;
+        second->Next = first;
+        first = second;
+        second = posTmp;
+    }
 }
 
 void takeNodeToFirst(List L, Position P)

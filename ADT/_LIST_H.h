@@ -57,6 +57,7 @@ void freeGrouper(Grouper g);
 void runGroup(int N, int M);
 //exec 3.12
 void reverseList(List L);
+void reverseList2(List L);
 //exec 3.15
 void takeNodeToFirst(List L, Position P);
 void insertIntoSelfAdj(ElementType x, List L);
